@@ -41,6 +41,12 @@ concat(Nome, Telefone, Resultado) :-
     string_concat(Parte1, " - Telefone: ", Parte2), %concatena com o telefone fornecido para criar a Parte2
     string_concat(Parte2, Telefone, Resultado).
 
+%Questão 10
+
+hamming([], 0). %Se a lista estiver vazia, a distância de Hamming é zero
+hamming([X|Xs], Distancia) :- %recebe uma lista como primeiro termo e retorna a distância de Hamming como segundo
+    hamming(Xs, D0),
+    (X = 1 -> Distancia is D0 + 1 ; Distancia = D0).
 
 %Questão 13
 slice(Lista, Indice_inicial, Indice_final, Sliced) :-

@@ -1,3 +1,26 @@
+%Questão 2
+
+merge([], L, L).
+merge(L, [], L).
+merge([X|Xs], [Y|Ys], [Z|Zs]) :-
+    X =< Y,
+    Z = X,
+    merge(Xs, [Y|Ys], Zs).
+merge([X|Xs], [Y|Ys], [Z|Zs]) :-
+    X @> Y,
+    Z = Y,
+    merge([X|Xs], Ys, Zs).
+
+merge([], L, L, []).
+merge(L, [], [], L).
+merge([X|Xs], [Y|Ys], [], [X|Zs]) :-
+    X =< Y,
+    merge(Xs, [Y|Ys], [], Zs).
+merge([X|Xs], [Y|Ys], [], [Y|Zs]) :-
+    X > Y,
+    merge([X|Xs], Ys, [], Zs).
+
+
 %Questão 3
 
 merge_sort([], []).
@@ -33,6 +56,23 @@ is_sorted([_]).
 is_sorted([X,Y|Cauda]) :- %Divide a lista em cabeça([X,Y]) e cauda
     (   X =< Y, %se o valor do primeiro elemento for menor ou igual ao segundo.
     is_sorted([Y|Cauda])). %Chama recursivamente
+    
+%Questão 5
+
+insert(Elem, [], [Elem]). %Caso a lista esteja vazia, o elemento é inserido no começo
+insert(Elem, [X|Xs], [Elem,X|Xs]) :-
+    Elem =< X.
+insert(Elem, [X|Xs], [X|Zs]) :-
+    Elem > X,
+    insert(Elem, Xs, Zs).
+
+%Questão 6
+
+insertion_sort([], []). %Se a lista for vazia,não tem o que ordenar
+insertion_sort([X|Xs], Sorted) :-
+    insertion_sort(Xs, PartiallySorted),
+    insert(X, PartiallySorted, Sorted).
+
 
 %Questão 7
 
